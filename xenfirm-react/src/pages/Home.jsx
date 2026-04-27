@@ -92,6 +92,7 @@ const process = [
 ];
 
 const testimonials = [
+  { stars: '★★★★★', text: '"Working with XenFirm Technologies was a great experience. They created a clean and modern website for our farm and helped us improve our online presence. Highly recommended."', initials: 'GR', name: 'Guru Rooster Farm', role: 'Sustainable Agriculture' },
   { stars: '★★★★★', text: '"Xenfirm built our entire e-commerce platform in just 6 weeks. The code quality and design were outstanding. Highly recommend them to any business looking for reliable IT partners."', initials: 'RK', name: 'Rajesh Kumar', role: 'Founder, ShopEasy India' },
   { stars: '★★★★★', text: '"The AI integration they built for our CRM has saved us 20 hours per week. The team was professional, communicative, and genuinely invested in our success."',                       initials: 'PM', name: 'Priya Menon',   role: 'CTO, GrowthLab' },
   { stars: '★★★★★', text: '"Our organic traffic tripled in 4 months after Xenfirm took over our digital marketing. Their SEO and content strategy is data-driven and results-focused."',                    initials: 'AV', name: 'Arjun Venkat',  role: 'CEO, AgroSmart Solutions' },
@@ -126,21 +127,22 @@ const Home = () => (
             <div className="hero-trust-text"><strong>30+ happy clients</strong><br/>across India &amp; worldwide</div>
           </div>
         </div>
-        <div className="hero-visual anim-fade-up d2" style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'flex-end', justifyContent: 'center', padding: '40px 0' }}>
-          <div style={{ position: 'absolute', top: '50%', right: '10%', transform: 'translateY(-50%)', width: '300px', height: '300px', background: 'var(--green)', filter: 'blur(140px)', opacity: 0.12, zIndex: 1, pointerEvents: 'none' }}></div>
-          {[
-            { icon: '🎯', phase: 'Phase 01', label: 'Strategy & Design', shift: '-40px', active: false },
-            { icon: '💻', phase: 'Phase 02', label: 'Build & Engineer',  shift: '0px',   active: true },
-            { icon: '🚀', phase: 'Phase 03', label: 'Deploy & Scale',    shift: '-20px', active: false },
-          ].map(({ icon, phase, label, shift, active }, i) => (
-            <div key={i} className={`anim-fade-up d${i+2}`} style={{ position: 'relative', zIndex: 3, width: '100%', maxWidth: active ? '380px' : '360px', background: active ? 'rgba(16,185,129,0.08)' : 'rgba(255,255,255,0.02)', backdropFilter: 'blur(12px)', border: `1px solid ${active ? 'rgba(16,185,129,0.3)' : 'rgba(255,255,255,0.06)'}`, borderRadius: '16px', padding: active ? '22px' : '20px', display: 'flex', alignItems: 'center', gap: '16px', transform: `translateX(${shift})`, boxShadow: active ? '0 10px 40px rgba(16,185,129,0.15)' : '0 10px 30px rgba(0,0,0,0.2)' }}>
-              <div style={{ width: active ? '56px' : '52px', height: active ? '56px' : '52px', borderRadius: '14px', background: active ? 'var(--green)' : 'rgba(255,255,255,0.04)', border: `1px solid ${active ? 'transparent' : 'rgba(255,255,255,0.08)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: active ? '1.4rem' : '1.3rem', flexShrink: 0, boxShadow: active ? '0 0 20px rgba(16,185,129,0.4)' : 'none' }}>{icon}</div>
-              <div>
-                <div style={{ fontSize: '0.7rem', color: active ? 'rgba(255,255,255,0.6)' : 'var(--gray-400)', fontWeight: 700, letterSpacing: '0.08em', marginBottom: '4px', textTransform: 'uppercase' }}>{phase}</div>
-                <div style={{ fontSize: active ? '1.1rem' : '1.05rem', color: 'white', fontWeight: active ? 800 : 700 }}>{label}</div>
-              </div>
-            </div>
-          ))}
+        <div className="hero-visual anim-fade-up d2" style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px 0', minHeight: '400px' }}>
+          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '300px', height: '300px', background: 'var(--green)', filter: 'blur(130px)', opacity: 0.12, zIndex: 1, pointerEvents: 'none' }}></div>
+          <img 
+            src="/home-hero-dev.png" 
+            alt="Business Developer" 
+            style={{ 
+              position: 'relative', 
+              zIndex: 3, 
+              width: '100%', 
+              maxWidth: '600px', 
+              height: 'auto',
+              maxHeight: '500px',
+              objectFit: 'contain',
+              filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3))'
+            }} 
+          />
         </div>
       </div>
     </section>

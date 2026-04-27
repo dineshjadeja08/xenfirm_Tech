@@ -1,12 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import ApplyModal from '../components/ApplyModal';
 
 const Careers = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRole, setSelectedRole] = useState("");
+
+  const openModal = (role = "") => {
+    setSelectedRole(role);
+    setIsModalOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    document.body.style.overflow = 'unset';
+  };
+
   useEffect(() => {
     if (window.XF && window.XF.observe) window.XF.observe();
   }, []);
 
   return (
     <>
+      <ApplyModal isOpen={isModalOpen} onClose={closeModal} initialTrack={selectedRole} context="Careers" />
       <div className="page-hero">
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="label">Join Our Team</div>
@@ -71,7 +87,7 @@ const Careers = () => {
                   <span className="job-tag tag-exp">0–1 Years</span>
                 </div>
               </div>
-              <a href="mailto:hello@xenfirm.com?subject=Frontend%20Developer%20Application" className="btn btn-primary" style={{ fontSize: '0.85rem', padding: '12px 24px' }}>Apply Now</a>
+              <button onClick={() => openModal("Frontend Developer")} className="btn btn-primary" style={{ fontSize: '0.85rem', padding: '12px 24px' }}>Apply Now</button>
             </div>
             <div className="job-card anim-fade-up d2">
               <div className="job-icon" id="ji-seo"></div>
@@ -83,7 +99,7 @@ const Careers = () => {
                   <span className="job-tag tag-exp">0–1 Years</span>
                 </div>
               </div>
-              <a href="mailto:hello@xenfirm.com?subject=SEO%20Specialist%20Application" className="btn btn-primary" style={{ fontSize: '0.85rem', padding: '12px 24px' }}>Apply Now</a>
+              <button onClick={() => openModal("SEO Specialist")} className="btn btn-primary" style={{ fontSize: '0.85rem', padding: '12px 24px' }}>Apply Now</button>
             </div>
             <div className="job-card anim-fade-up d3">
               <div className="job-icon" id="ji-intern"></div>
@@ -95,7 +111,7 @@ const Careers = () => {
                   <span className="job-tag tag-exp">0–1 Years</span>
                 </div>
               </div>
-              <a href="mailto:hello@xenfirm.com?subject=Digital%20Marketing%20Intern%20Application" className="btn btn-primary" style={{ fontSize: '0.85rem', padding: '12px 24px' }}>Apply Now</a>
+              <button onClick={() => openModal("Digital Marketing Intern")} className="btn btn-primary" style={{ fontSize: '0.85rem', padding: '12px 24px' }}>Apply Now</button>
             </div>
           </div>
         </div>

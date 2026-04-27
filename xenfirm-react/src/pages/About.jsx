@@ -11,10 +11,30 @@ const values = [
 ];
 
 const team = [
-  { initials: 'D', bg: '#101418', name: 'Dineshkumar C', role: 'Founder & CEO',          bio: 'Python/Django architect with a vision to build AI-powered products that make a difference.' },
-  { initials: 'R', bg: '#0A8A4F', name: 'Ravi Shankar',  role: 'Lead Frontend Dev',      bio: 'React & TypeScript specialist. Creates interfaces that users love.' },
-  { initials: 'P', bg: '#495057', name: 'Priya Lakshmi', role: 'UI/UX Designer',          bio: 'Figma expert who turns complex problems into elegant, intuitive designs.' },
-  { initials: 'A', bg: '#212529', name: 'Arun Kumar',    role: 'Digital Marketing Lead',  bio: 'SEO & performance ads strategist with a proven track record of 3x ROI campaigns.' },
+  { 
+    initials: 'D', 
+    bg: 'var(--green-dark)', 
+    name: 'Dinesh', 
+    role: 'Founder', 
+    tags: ['Software Developer', 'Brand Strategist', 'Internal Ops Lead'],
+    bio: 'Driving the technical vision and brand strategy of Xenfirm.' 
+  },
+  { 
+    initials: 'D', 
+    bg: 'var(--green)', 
+    name: 'Deepan', 
+    role: 'Co-founder', 
+    tags: ['Sales & Marketing Head'],
+    bio: 'Focusing on growth, client partnerships, and brand expansion.' 
+  },
+  { 
+    initials: 'Y', 
+    bg: 'var(--green-light)', 
+    name: 'Yuganesh', 
+    role: 'Dev Team Lead', 
+    tags: ['Engineering Lead'],
+    bio: 'Leading our engineering team to deliver robust, scalable solutions.' 
+  },
 ];
 
 const stack = ['Python','Django','React','TypeScript','Next.js','React Native','Flutter','PostgreSQL','Redis','Docker','AWS','OpenAI API','Gemini AI','Stripe','Tailwind CSS','Celery','GraphQL','Node.js'];
@@ -33,30 +53,20 @@ const About = () => (
     <section className="section">
       <div className="container">
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', alignItems: 'center' }} className="about-story-grid">
-          <div className="anim-fade-up" style={{ background: 'var(--black)', borderRadius: 'var(--radius-lg)', padding: '36px', border: '1px solid rgba(255,255,255,0.07)', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <div style={{ display: 'flex', gap: '12px' }}>
-              {[{ n: '50+', l: 'Projects', green: true }, { n: '30+', l: 'Clients' }, { n: '5+', l: 'Years' }].map(({ n, l, green }) => (
-                <div key={l} style={{ flex: 1, background: green ? 'rgba(10,138,79,0.12)' : 'rgba(255,255,255,0.04)', border: `1px solid ${green ? 'rgba(10,138,79,0.25)' : 'rgba(255,255,255,0.07)'}`, borderRadius: 'var(--radius-md)', padding: '18px', textAlign: 'center' }}>
-                  <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', fontWeight: 800, color: 'white', lineHeight: 1 }}>{n}</div>
-                  <div style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.35)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', marginTop: '4px' }}>{l}</div>
-                </div>
-              ))}
-            </div>
-            <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 'var(--radius-md)', padding: '18px' }}>
-              <div style={{ fontSize: '0.7rem', fontWeight: 600, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>Core Tech Stack</div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                {['Python','Django','React','Next.js','Flutter','AWS','OpenAI','PostgreSQL','+10 more'].map(t => (
-                  <span key={t} style={{ background: 'rgba(10,138,79,0.15)', border: '1px solid rgba(10,138,79,0.25)', color: 'rgba(255,255,255,0.65)', padding: '3px 10px', borderRadius: '4px', fontSize: '0.72rem', fontWeight: 600 }}>{t}</span>
-                ))}
-              </div>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'white', borderRadius: 'var(--radius-md)', padding: '12px 16px' }}>
-              <div style={{ width: '36px', height: '36px', background: 'var(--green-pale)', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--green)', flexShrink: 0, fontSize: '1.2rem' }}>🏆</div>
-              <div>
-                <div style={{ fontFamily: 'var(--font-display)', fontSize: '0.88rem', fontWeight: 700, color: 'var(--black)' }}>Top IT Firm</div>
-                <div style={{ fontSize: '0.72rem', color: 'var(--green)', fontWeight: 500 }}>Global / Remote</div>
-              </div>
-            </div>
+          <div className="anim-fade-up" style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '300px', height: '300px', background: 'var(--green)', filter: 'blur(120px)', opacity: 0.1, zIndex: 1, pointerEvents: 'none' }}></div>
+            <img 
+              src="/about-dev.png" 
+              alt="Developer at Work" 
+              style={{ 
+                position: 'relative', 
+                zIndex: 3, 
+                width: '100%', 
+                maxWidth: '500px', 
+                height: 'auto',
+                filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))'
+              }} 
+            />
           </div>
           <div className="anim-fade-up d2">
             <div className="label">Our Story</div>
@@ -103,13 +113,18 @@ const About = () => (
           <div className="label">The Team</div>
           <h2 className="section-title">The People Behind Xenfirm</h2>
         </div>
-        <div className="grid-4">
-          {team.map(({ initials, bg, name, role, bio }, i) => (
-            <div key={name} className={`anim-fade-up d${i + 1}`} style={{ textAlign: 'center', padding: '28px 20px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--gray-100)', background: 'white', transition: 'var(--transition)' }}>
-              <div style={{ width: '72px', height: '72px', borderRadius: '50%', background: bg, margin: '0 auto 14px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: 700, color: 'white' }}>{initials}</div>
-              <div style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', fontWeight: 700, marginBottom: '3px' }}>{name}</div>
-              <div style={{ fontSize: '0.78rem', color: 'var(--green)', fontWeight: 600, marginBottom: '8px' }}>{role}</div>
-              <div style={{ fontSize: '0.78rem', color: 'var(--gray-400)', lineHeight: 1.6 }}>{bio}</div>
+        <div className="grid-3">
+          {team.map(({ initials, bg, name, role, tags, bio }, i) => (
+            <div key={name} className={`anim-fade-up d${i + 1}`} style={{ textAlign: 'center', padding: '32px 24px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--gray-100)', background: 'white', transition: 'var(--transition)', boxShadow: 'var(--shadow-sm)' }}>
+              <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: bg, margin: '0 auto 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-display)', fontSize: '1.6rem', fontWeight: 800, color: 'white', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>{initials}</div>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.1rem', fontWeight: 700, marginBottom: '2px', color: 'var(--black)' }}>{name}</div>
+              <div style={{ fontSize: '0.8rem', color: 'var(--green)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>{role}</div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', justifyContent: 'center', marginBottom: '16px' }}>
+                {tags.map(t => (
+                  <span key={t} style={{ fontSize: '0.65rem', fontWeight: 600, padding: '3px 8px', borderRadius: '4px', background: 'var(--gray-50)', color: 'var(--gray-600)', border: '1px solid var(--gray-100)' }}>{t}</span>
+                ))}
+              </div>
+              <div style={{ fontSize: '0.85rem', color: 'var(--gray-500)', lineHeight: 1.6 }}>{bio}</div>
             </div>
           ))}
         </div>

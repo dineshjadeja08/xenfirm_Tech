@@ -182,6 +182,83 @@ a { text-decoration: none; color: inherit; }
 .mobile-menu a:hover { color: var(--green); }
 .mobile-menu .btn { margin-top: 16px; width: 100%; justify-content: center; }
 
+/* ── DROPDOWN ── */
+.nav-dropdown {
+  position: relative;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  min-width: 260px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--gray-100);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  padding: 8px 0;
+  z-index: 1000;
+  margin-top: 5px;
+}
+.nav-dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.dropdown-item {
+  display: block;
+  padding: 10px 20px;
+  font-size: 0.855rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  transition: var(--transition);
+}
+.dropdown-item:hover {
+  background: var(--gray-50);
+  color: var(--green);
+}
+.dropdown-item.coming-soon {
+  color: var(--gray-400);
+  pointer-events: none;
+}
+.coming-soon-badge {
+  font-size: 0.65rem;
+  background: var(--gray-100);
+  color: var(--gray-500);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+  font-weight: 700;
+}
+
+.mobile-dropdown {
+  display: flex;
+  flex-direction: column;
+}
+.mobile-dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 14px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--gray-800);
+  border-bottom: 1px solid var(--gray-50);
+  cursor: pointer;
+}
+.mobile-dropdown-items {
+  background: var(--gray-50);
+  padding-left: 20px;
+}
+.mobile-dropdown-items a {
+  border-bottom: none;
+  font-size: 0.9rem;
+}
+
+
 /* ── PAGE HERO ── */
 .page-hero {
   padding: 140px 0 72px;
@@ -262,6 +339,67 @@ footer {
 .footer-col ul li a { font-size: 0.855rem; color: rgba(255,255,255,0.4); transition: color var(--transition); }
 .footer-col ul li a:hover { color: rgba(255,255,255,0.85); }
 .footer-social { display: flex; gap: 8px; margin-top: 20px; }
+
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+.modal-content {
+  background: white;
+  width: 100%;
+  max-width: 650px;
+  border-radius: 2px;
+  padding: 48px;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: fadeUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.modal-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: var(--gray-50);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--gray-500);
+}
+.modal-close:hover {
+  background: var(--gray-100);
+  color: var(--black);
+  transform: rotate(90deg);
+}
+.apply-form .form-group {
+  margin-bottom: 16px;
+}
+.modal-content .form-control,
+.modal-content .btn {
+  border-radius: 2px;
+}
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 32px 24px;
+  }
+}
+
 .social-btn {
   width: 34px; height: 34px; border-radius: var(--radius-md);
   background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
@@ -296,6 +434,12 @@ select.form-control { cursor: pointer; appearance: none; background-image: url("
 /* ── ANIMATIONS — class-based reveal ── */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+.float-anim { animation: float 6s ease-in-out infinite; }
 
 /* Hidden by default; .visible triggers the animation */
 .anim-fade-up {
@@ -417,8 +561,8 @@ select.form-control { cursor: pointer; appearance: none; background-image: url("
 .cta-band .btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; }
 
 /* ── SERVICE BIG CARDS ── */
-.service-big-card { display: grid; grid-template-columns: 1fr 1fr; border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--gray-100); margin-bottom: 28px; box-shadow: var(--shadow-sm); transition: var(--transition); }
-.service-big-card:hover { box-shadow: var(--shadow-lg); }
+.service-big-card { display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 80px; transition: var(--transition); }
+/* Hover effect removed */
 .service-big-card.reverse { direction: rtl; }
 .service-big-card.reverse > * { direction: ltr; }
 .sbc-content { padding: 48px; display: flex; flex-direction: column; justify-content: center; }

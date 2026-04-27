@@ -7,6 +7,7 @@ import Portfolio from './pages/Portfolio';
 import Blog from './pages/Blog';
 import Careers from './pages/Careers';
 import Contact from './pages/Contact';
+import Upskill from './pages/Upskill';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="pages/blog" element={<Blog />} />
           <Route path="pages/careers" element={<Careers />} />
           <Route path="pages/contact" element={<Contact />} />
+          <Route path="pages/upskill" element={<Upskill />} />
           {/* Short aliases */}
           <Route path="about" element={<About />} />
           <Route path="services" element={<Services />} />
@@ -27,6 +29,7 @@ function App() {
           <Route path="blog" element={<Blog />} />
           <Route path="careers" element={<Careers />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="upskill" element={<Upskill />} />
         </Route>
       </Routes>
     </Router>
