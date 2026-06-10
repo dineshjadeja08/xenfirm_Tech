@@ -8,11 +8,18 @@ import Blog from './pages/Blog';
 import Careers from './pages/Careers';
 import Contact from './pages/Contact';
 import Upskill from './pages/Upskill';
+import CertificateSearch from './pages/CertificateSearch';
+import CertificateVerification from './pages/CertificateVerification';
 
 function App() {
   return (
     <Router>
       <Routes>
+        {/* Certificate Verification Routes */}
+        <Route path="/verify" element={<CertificateSearch />} />
+        <Route path="/verify/:certificateId" element={<CertificateVerification />} />
+
+        {/* Main Website Routes */}
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="pages/about" element={<About />} />
