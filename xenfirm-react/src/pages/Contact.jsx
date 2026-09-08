@@ -1,149 +1,249 @@
-import React, { useState } from 'react';
-
+import { useRef, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { company, products, services } from "../data/company";
+import { PageHero } from "../components/Sections";
+import { sendEnquiry } from "../lib/enquiry";
 const faqs = [
-  { q: 'How long does a typical project take?',       a: 'Project timelines vary depending on scope. A simple website takes 2–4 weeks, a web application 6–12 weeks, and a full SaaS product 3–6 months. We\'ll give you a detailed timeline during the discovery phase.' },
-  { q: 'Do you provide ongoing maintenance after launch?', a: 'Yes! All our packages include a minimum of 1 month of post-launch support. We also offer ongoing monthly maintenance and retainer plans to keep your product running smoothly.' },
-  { q: 'Who owns the code once the project is complete?',  a: 'You do — 100%. Upon final payment, all source code, assets, and intellectual property are transferred to you. We don\'t retain any rights to what we build for you.' },
-  { q: 'Do you work with clients outside India?',          a: 'Absolutely! We work with clients worldwide. We\'re experienced with remote collaboration using tools like Slack, Notion, and Zoom, and are comfortable with different time zones.' },
-  { q: 'What\'s your payment structure?',                  a: 'We typically work on a milestone-based payment structure: 40% upfront, 30% at the midpoint, and 30% upon final delivery. For ongoing retainers, we bill monthly in advance.' },
+  [
+    "How is the project priced?",
+    "We agree scope, milestones, payment terms and any third-party costs in a written proposal. There is no single price that fits every project.",
+  ],
+  [
+    "Who owns custom software?",
+    "Ownership and handover are defined in the project agreement. Third-party components keep their own licences. XenFirm products are offered under their separate product licence terms.",
+  ],
+  [
+    "What happens after launch?",
+    "Maintenance, hosting responsibilities, support hours and response targets are agreed for your project. Ask us to include ongoing support in the proposal.",
+  ],
+  [
+    "Can I try your products?",
+    "NowSuite and Linkora are coming soon. Public demos and pricing have not been announced. Send a product enquiry to discuss availability.",
+  ],
 ];
-
-const contactInfoItems = [
-  { icon: '✉️', label: 'Email',          value: <a href="mailto:hello@xenfirm.com">hello@xenfirm.com</a> },
-  { icon: '💬', label: 'WhatsApp',       value: <a href="https://wa.me/919876543210" target="_blank" rel="noopener">Chat on WhatsApp</a> },
-  { icon: '🕐', label: 'Business Hours', value: 'Mon – Sat: 9:00 AM – 7:00 PM IST' },
-];
-
-const Contact = () => {
-  const [openFaq, setOpenFaq] = useState(0);
-  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus('sending');
-    const formData = new FormData(e.target);
+export default function Contact() {
+  const [params] = useSearchParams();
+  const requestedProduct = products.find(
+    (p) => p.slug === params.get("product"),
+  );
+  const requestedService = services.find(
+    (s) => s.slug === params.get("service"),
+  );
+  const initialInterest = requestedProduct
+    ? `Product: ${requestedProduct.name}`
+    : requestedService?.title || "";
+  const [status, setStatus] = useState("idle");
+  const sending = useRef(false);
+  async function submit(event) {
+    event.preventDefault();
+    if (sending.current) return;
+    const form = event.currentTarget;
+    sending.current = true;
+    setStatus("sending");
     try {
-      const res = await fetch('https://formspree.io/f/xvzvekbk', {
-        method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: formData,
-      });
-      if (res.ok) {
-        setStatus('sent');
-        e.target.reset();
-        setTimeout(() => setStatus('idle'), 5000);
-      } else {
-        setStatus('error');
-      }
+      await sendEnquiry(new FormData(form));
+      form.reset();
+      setStatus("sent");
     } catch {
-      setStatus('error');
+      setStatus("error");
+    } finally {
+      sending.current = false;
     }
-  };
-
+  }
   return (
     <>
-      <div className="page-hero">
-        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="label">Get In Touch</div>
-          <h1>Let's Build Something<br/>Great Together</h1>
-          <p>Tell us about your project and we'll get back to you within 24 hours with a free consultation and estimate.</p>
-        </div>
-      </div>
-
+      <PageHero
+        eyebrow="Contact XenFirm"
+        title={
+          requestedProduct
+            ? `Let’s talk about ${requestedProduct.name}.`
+            : "What would you like to build?"
+        }
+      >
+        Tell us about your goals, existing systems or product questions. We’ll
+        use your details to respond to your enquiry.
+      </PageHero>
       <section className="section">
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: '64px', alignItems: 'start' }} className="contact-grid-resp">
-            {/* Info */}
-            <div className="anim-fade-up">
-              <h2 style={{ fontSize: '1.6rem', marginBottom: '8px' }}>Contact Information</h2>
-              <p style={{ marginBottom: '32px' }}>Reach out through any of these channels — we respond fast.</p>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                {contactInfoItems.map(({ icon, label, value }, i) => (
-                  <div key={label} style={{ display: 'flex', gap: '18px', padding: '24px 0', borderBottom: i < contactInfoItems.length - 1 ? '1px solid var(--gray-100)' : 'none' }}>
-                    <div style={{ width: '48px', height: '48px', background: 'var(--green-pale)', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', flexShrink: 0 }}>{icon}</div>
-                    <div>
-                      <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--gray-400)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>{label}</div>
-                      <div style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--black)' }}>{value}</div>
-                    </div>
-                  </div>
-                ))}
+        <div className="container detail-grid">
+          <aside className="contact-aside">
+            <span className="eyebrow">Start a conversation</span>
+            <h2>
+              Good work starts
+              <br />
+              with a clear brief.
+            </h2>
+            <p>
+              Share the problem you want to solve and what a useful result would
+              look like.
+            </p>
+            <dl>
+              <dt>Email</dt>
+              <dd>
+                <a href={`mailto:${company.email}`}>{company.email}</a>
+              </dd>
+              <dt>WhatsApp</dt>
+              <dd>
+                <a
+                  href={company.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Chat with XenFirm ↗
+                </a>
+              </dd>
+            </dl>
+            <p className="section-note">
+              Please don’t include passwords, payment details or confidential
+              documents in this form.
+            </p>
+          </aside>
+          <div className="xf-card enquiry-card">
+            <h2>
+              {requestedProduct
+                ? "Product enquiry"
+                : "Tell us about your project"}
+            </h2>
+            <p>Fields marked * are required.</p>
+            <form onSubmit={submit} aria-busy={status === "sending"}>
+              <div className="form-pair">
+                <label className="form-group" htmlFor="name">
+                  Your name *
+                  <input
+                    id="name"
+                    name="name"
+                    autoComplete="name"
+                    required
+                    maxLength={120}
+                    className="form-control"
+                  />
+                </label>
+                <label className="form-group" htmlFor="email">
+                  Email *
+                  <input
+                    id="email"
+                    name="email"
+                    autoComplete="email"
+                    type="email"
+                    required
+                    maxLength={254}
+                    className="form-control"
+                  />
+                </label>
               </div>
-            </div>
-
-            {/* Form */}
-            <div className="anim-fade-up d2" style={{ background: 'white', borderRadius: 'var(--radius-xl)', border: '1px solid var(--gray-100)', padding: '44px', boxShadow: 'var(--shadow-md)' }}>
-              <h3 style={{ marginBottom: '6px' }}>Send Us a Message</h3>
-              <p style={{ fontSize: '0.88rem', marginBottom: '28px' }}>We'll respond within 24 hours — usually much faster.</p>
-
-              {status === 'sent' && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', background: 'var(--green-pale)', border: '1.5px solid var(--green-mid)', borderRadius: 'var(--radius-md)', padding: '16px 20px', marginBottom: '20px', fontSize: '0.9rem', fontWeight: 600, color: 'var(--green-dark)' }}>
-                  ✅ Message sent! We'll get back to you within 24 hours.
-                </div>
-              )}
-              {status === 'error' && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', background: '#FFF5F5', border: '1.5px solid #FCA5A5', borderRadius: 'var(--radius-md)', padding: '16px 20px', marginBottom: '20px', fontSize: '0.9rem', fontWeight: 600, color: '#B91C1C' }}>
-                  ❌ Something went wrong. Please try again or email us directly.
-                </div>
-              )}
-
-              <form onSubmit={handleSubmit}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                  <div className="form-group"><label className="form-label">First Name *</label><input className="form-control" type="text" name="firstName" required /></div>
-                  <div className="form-group"><label className="form-label">Last Name *</label><input className="form-control" type="text" name="lastName" required /></div>
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                  <div className="form-group"><label className="form-label">Email Address *</label><input className="form-control" type="email" name="email" required /></div>
-                  <div className="form-group"><label className="form-label">Phone Number</label><input className="form-control" type="tel" name="phone" /></div>
-                </div>
-                <div className="form-group"><label className="form-label">Company / Business Name</label><input className="form-control" type="text" name="company" /></div>
-                <div className="form-group">
-                  <label className="form-label">Service You're Interested In *</label>
-                  <select className="form-control" name="service" required defaultValue="">
-                    <option value="" disabled></option>
-                    {['Web Development','Mobile App Development','AI & SaaS Solutions','Digital Marketing','UI/UX Design','Cloud & DevOps','Other / Not Sure Yet'].map(s => <option key={s}>{s}</option>)}
-                  </select>
-                </div>
-                <div className="form-group"><label className="form-label">Tell Us About Your Project *</label><textarea className="form-control" name="message" required /></div>
-                <button type="submit" className="btn btn-primary btn-lg" disabled={status === 'sending'} style={{ width: '100%', justifyContent: 'center', marginTop: '8px' }}>
-                  {status === 'sending' ? 'Sending...' : 'Send Message →'}
-                </button>
-                <p style={{ fontSize: '0.75rem', color: 'var(--gray-400)', textAlign: 'center', marginTop: '12px' }}>🔒 Your information is secure and never shared.</p>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="section" style={{ background: 'var(--off-white)' }}>
-        <div className="container" style={{ maxWidth: '760px' }}>
-          <div className="section-header centered anim-fade-up">
-            <div className="label">FAQ</div>
-            <h2 className="section-title">Common Questions</h2>
-          </div>
-          <div className="anim-fade-up">
-            {faqs.map(({ q, a }, i) => (
-              <div key={q} style={{ padding: '20px 0', borderBottom: '1px solid var(--gray-100)', cursor: 'pointer' }} onClick={() => setOpenFaq(openFaq === i ? -1 : i)}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.95rem', fontWeight: 700, color: 'var(--black)' }}>
-                  {q}
-                  <span style={{ fontSize: '18px', color: 'var(--green)', fontWeight: 700, transform: openFaq === i ? 'rotate(45deg)' : 'none', transition: 'transform 0.2s ease', flexShrink: 0, marginLeft: '16px' }}>+</span>
-                </div>
-                {openFaq === i && (
-                  <div style={{ fontSize: '0.88rem', color: 'var(--gray-600)', lineHeight: 1.7, marginTop: '12px' }}>{a}</div>
+              <div className="form-pair">
+                <label className="form-group" htmlFor="company">
+                  Company
+                  <input
+                    id="company"
+                    name="company"
+                    autoComplete="organization"
+                    maxLength={160}
+                    className="form-control"
+                  />
+                </label>
+                <label className="form-group" htmlFor="phone">
+                  Phone (optional)
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    autoComplete="tel"
+                    maxLength={30}
+                    className="form-control"
+                  />
+                </label>
+              </div>
+              <label className="form-group" htmlFor="interest">
+                What do you need? *
+                <select
+                  key={initialInterest}
+                  id="interest"
+                  name="interest"
+                  defaultValue={initialInterest}
+                  required
+                  className="form-control"
+                >
+                  <option value="" disabled>
+                    Select a service or product
+                  </option>
+                  <optgroup label="IT services">
+                    {services.map((s) => (
+                      <option key={s.slug}>{s.title}</option>
+                    ))}
+                  </optgroup>
+                  <optgroup label="Product enquiries">
+                    {products.map((p) => (
+                      <option key={p.slug}>Product: {p.name}</option>
+                    ))}
+                  </optgroup>
+                  <option>Other / Not sure yet</option>
+                </select>
+              </label>
+              <label className="form-group" htmlFor="message">
+                Your requirements *
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  minLength={10}
+                  maxLength={5000}
+                  className="form-control"
+                  placeholder="What are you trying to achieve? Include any useful timeline or budget context."
+                />
+              </label>
+              <div className="honeypot" aria-hidden="true">
+                <label htmlFor="website">Leave this empty</label>
+                <input
+                  id="website"
+                  name="_gotcha"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+              <label className="consent-row">
+                <input type="checkbox" name="privacyAcknowledged" required />{" "}
+                <span>
+                  I have read the <Link to="/privacy">privacy notice</Link> and
+                  agree to be contacted about this enquiry. *
+                </span>
+              </label>
+              <button
+                className="btn btn-primary btn-lg"
+                disabled={status === "sending"}
+                type="submit"
+              >
+                {status === "sending" ? "Sending…" : "Send enquiry ↗"}
+              </button>
+              <div aria-live="polite" aria-atomic="true">
+                {status === "sent" && (
+                  <p className="form-success" role="status">
+                    Your enquiry was sent successfully. Thank you for contacting
+                    XenFirm.
+                  </p>
+                )}
+                {status === "error" && (
+                  <p className="form-error" role="alert">
+                    We couldn’t send your enquiry. Your details are still here.
+                    Please retry or{" "}
+                    <a href={`mailto:${company.email}`}>email us directly</a>.
+                  </p>
                 )}
               </div>
-            ))}
+            </form>
           </div>
         </div>
       </section>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .contact-grid-resp { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
+      <section className="section soft-section">
+        <div className="container prose">
+          <h2>Before we get started.</h2>
+          {faqs.map(([q, a]) => (
+            <details className="xf-faq" key={q}>
+              <summary>{q}</summary>
+              <p>{a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
     </>
   );
-};
-
-export default Contact;
+}

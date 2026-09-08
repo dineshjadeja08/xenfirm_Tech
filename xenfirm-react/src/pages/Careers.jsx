@@ -36,17 +36,17 @@ const Careers = () => {
         <div className="container">
           <div className="section-header centered anim-fade-up">
             <div className="label">Why Xenfirm</div>
-            <h2 className="section-title">Perks &amp; Benefits</h2>
+            <h2 className="section-title">Working at XenFirm</h2>
           </div>
           <div className="grid-4">
-            <div className="perk-card anim-fade-up d1"><div className="perk-icon" data-icon="dollar"></div><div className="perk-title">Competitive Pay</div><p>Above-market salaries and performance bonuses tied to your impact.</p></div>
-            <div className="perk-card anim-fade-up d2"><div className="perk-icon" data-icon="home"></div><div className="perk-title">Remote Friendly</div><p>Hybrid or fully remote options. Work from where you do your best thinking.</p></div>
-            <div className="perk-card anim-fade-up d3"><div className="perk-icon" data-icon="book"></div><div className="perk-title">Learning Budget</div><p>₹15,000/year for courses, books, and conferences of your choice.</p></div>
-            <div className="perk-card anim-fade-up d4"><div className="perk-icon" data-icon="rocket"></div><div className="perk-title">Fast Growth</div><p>Real ownership, fast promotions, and clear career paths. No corporate ladder.</p></div>
+            <div className="perk-card anim-fade-up d1"><div className="perk-icon" data-icon="dollar"></div><div className="perk-title">Competitive Pay</div><p>Compensation and any incentives are specified in the written offer.</p></div>
+            <div className="perk-card anim-fade-up d2"><div className="perk-icon" data-icon="home"></div><div className="perk-title">Remote Friendly</div><p>Work location and schedule depend on the role and are discussed during hiring.</p></div>
+            <div className="perk-card anim-fade-up d3"><div className="perk-icon" data-icon="book"></div><div className="perk-title">Learning</div><p>Learning opportunities and any course support are discussed for each role.</p></div>
+            <div className="perk-card anim-fade-up d4"><div className="perk-icon" data-icon="rocket"></div><div className="perk-title">Fast Growth</div><p>Discuss responsibilities, feedback and development goals with your team.</p></div>
             <div className="perk-card anim-fade-up d1"><div className="perk-icon" data-icon="users"></div><div className="perk-title">Collaborative Culture</div><p>Flat hierarchy, open feedback, and a team that genuinely supports each other.</p></div>
-            <div className="perk-card anim-fade-up d2"><div className="perk-icon" data-icon="heart"></div><div className="perk-title">Health Coverage</div><p>Group health insurance for you and your immediate family.</p></div>
-            <div className="perk-card anim-fade-up d3"><div className="perk-icon" data-icon="monitor"></div><div className="perk-title">Latest Tools</div><p>MacBook, premium software subscriptions, and best-in-class dev setup.</p></div>
-            <div className="perk-card anim-fade-up d4"><div className="perk-icon" data-icon="party"></div><div className="perk-title">Team Events</div><p>Quarterly off-sites, team lunches, hackathons, and celebration dinners.</p></div>
+            <div className="perk-card anim-fade-up d2"><div className="perk-icon" data-icon="heart"></div><div className="perk-title">Role-specific benefits</div><p>Any role-specific benefits are confirmed in your written offer.</p></div>
+            <div className="perk-card anim-fade-up d3"><div className="perk-icon" data-icon="monitor"></div><div className="perk-title">Tools & access</div><p>Equipment and software access are agreed before you start.</p></div>
+            <div className="perk-card anim-fade-up d4"><div className="perk-icon" data-icon="party"></div><div className="perk-title">Team Events</div><p>Collaborate with colleagues on shared projects and learning activities.</p></div>
           </div>
         </div>
       </section>

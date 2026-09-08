@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /verify/
+Sitemap: https://www.xenfirm.com/sitemap.xml
