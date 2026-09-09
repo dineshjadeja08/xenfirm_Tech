@@ -53,6 +53,8 @@ test("built routes contain real content, correct metadata and resolvable interna
     );
     assert.match(html, /<h1[ >]/, route);
     assert.match(html, /<meta name="description"/, route);
+    assert.match(html, /<meta property="og:site_name" content="XenFirm Technologies"/, route);
+    assert.match(html, /<meta name="twitter:card" content="summary"/, route);
     assert.ok(html.includes(`href="${metadataFor(route).canonical}"`), route);
     for (const match of html.matchAll(/href="(\/[^"#?]*)[^"]*"/g)) {
       const target = match[1];

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { XenfirmLogo } from "./Brand";
-import { company } from "../data/company";
+import { company, services } from "../data/company";
+
 export default function Footer() {
   return (
     <footer className="xf-footer">
@@ -19,18 +20,10 @@ export default function Footer() {
               for growing businesses.
             </p>
             <div className="footer-external">
-              <a
-                href={company.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={company.linkedin} target="_blank" rel="noopener noreferrer">
                 LinkedIn ↗
               </a>
-              <a
-                href={company.github}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={company.github} target="_blank" rel="noopener noreferrer">
                 GitHub ↗
               </a>
             </div>
@@ -43,6 +36,14 @@ export default function Footer() {
             <Link to="/upskill">XenFirm Upskill</Link>
           </div>
           <div>
+            <h2>Services</h2>
+            {services.map((service) => (
+              <Link key={service.slug} to={`/services/${service.slug}`}>
+                {service.title}
+              </Link>
+            ))}
+          </div>
+          <div>
             <h2>Company</h2>
             <Link to="/about">About XenFirm</Link>
             <Link to="/careers">Careers</Link>
@@ -52,19 +53,17 @@ export default function Footer() {
           <div>
             <h2>Let’s talk</h2>
             <a href={`mailto:${company.email}`}>{company.email}</a>
-            <a
-              href={company.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={company.whatsapp} target="_blank" rel="noopener noreferrer">
               Chat on WhatsApp ↗
             </a>
             <Link to="/contact">Project enquiry</Link>
           </div>
         </div>
+        <p className="footer-tech">Stack in active delivery: React, JavaScript/TypeScript, Node.js, REST APIs, PostgreSQL and cloud deployment.</p>
         <div className="footer-bottom">
           <p>© {new Date().getFullYear()} XenFirm Technologies</p>
           <div>
+            <a href="#main-content">Back to top ↑</a>
             <Link to="/privacy">Privacy</Link>
             <Link to="/terms">Website terms</Link>
           </div>
