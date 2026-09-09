@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { services, products } from "../data/company";
+import { services, products, company } from "../data/company";
+
 export function PageHero({ eyebrow, title, children }) {
   return (
     <header className="page-hero">
@@ -11,6 +12,7 @@ export function PageHero({ eyebrow, title, children }) {
     </header>
   );
 }
+
 export function ServiceCards({ limit }) {
   return (
     <div className="grid-3">
@@ -29,6 +31,7 @@ export function ServiceCards({ limit }) {
     </div>
   );
 }
+
 export function ProductCards() {
   return (
     <div className="grid-2">
@@ -45,6 +48,7 @@ export function ProductCards() {
     </div>
   );
 }
+
 export function CTA() {
   return (
     <section className="cta-band">
@@ -56,9 +60,14 @@ export function CTA() {
           <Link className="btn btn-primary btn-lg" to="/contact">
             Discuss your project ↗
           </Link>
-          <Link className="btn btn-outline-light btn-lg" to="/products">
-            Explore products
-          </Link>
+          <a
+            className="btn btn-outline-light btn-lg"
+            href={company.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Chat on WhatsApp ↗
+          </a>
         </div>
       </div>
     </section>
