@@ -13,8 +13,6 @@
   --green-light:  #34D399;
   --green-pale:   #ECFDF5;
   --green-mid:    #A7F3D0;
-  --secondary:    #00C4FF;
-  --tertiary:     #00DCFE;
   /* Neutral palette */
   --white:        #FFFFFF;
   --off-white:    #F8F9FA;
@@ -292,7 +290,7 @@ a { text-decoration: none; color: inherit; }
 
 /* ── STAT CARDS ── */
 .stat-card { text-align: center; padding: 28px 20px; }
-.stat-number { font-family: var(--font-display); font-size: 2.6rem; font-weight: 800; color: var(--green); line-height: 1; margin-bottom: 6px; }
+.stat-number { font-family: var(--font-display); font-size: 2.6rem; font-weight: 800; color: var(--black); line-height: 1; margin-bottom: 6px; }
 .stat-label { font-size: 0.8rem; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.08em; }
 
 /* ── GREEN SECTION ── */
@@ -578,7 +576,7 @@ select.form-control { cursor: pointer; appearance: none; background-image: url("
 .portfolio-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
 .portfolio-img { height: 200px; background: var(--off-white); display: flex; align-items: center; justify-content: center; font-size: 3rem; position: relative; overflow: hidden; }
 .portfolio-body { padding: 24px; }
-.portfolio-tag { font-size: 0.7rem; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+.portfolio-tag { font-size: 0.7rem; font-weight: 700; color: var(--gray-800); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
 .portfolio-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; color: var(--black); }
 .portfolio-desc { font-size: 0.85rem; color: var(--gray-500); line-height: 1.6; }
 
@@ -587,7 +585,7 @@ select.form-control { cursor: pointer; appearance: none; background-image: url("
 .blog-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
 .blog-img { height: 180px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; }
 .blog-body { padding: 22px; }
-.blog-category { font-size: 0.7rem; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+.blog-category { font-size: 0.7rem; font-weight: 700; color: var(--gray-800); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
 .blog-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--black); margin-bottom: 8px; line-height: 1.4; }
 .blog-excerpt { font-size: 0.83rem; color: var(--gray-500); line-height: 1.6; margin-bottom: 16px; }
 .blog-meta { display: flex; align-items: center; gap: 12px; font-size: 0.75rem; color: var(--gray-400); }
