@@ -180,9 +180,9 @@ main {
   max-width: 1050px;
 }
 .xf-hero h1 {
-  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
-  line-height: 1.1;
-  letter-spacing: -0.055em;
+  font-size: clamp(3.2rem, 7vw, 6.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
   font-weight: 700;
 }
 .xf-hero h1 em {
@@ -267,9 +267,9 @@ main {
   margin-bottom: 38px;
 }
 .section-heading h2 {
-  font-size: clamp(1.8rem, 3vw, 2.65rem);
-  line-height: 1.2;
-  letter-spacing: -0.04em;
+  font-size: clamp(2.1rem, 4vw, 3.3rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
 }
 .section-heading > p {
   max-width: 390px;
@@ -289,7 +289,7 @@ main {
   min-width: 0;
 }
 .xf-card h3 {
-  font-size: 1.2rem;
+  font-size: clamp(1.3rem, 2.4vw, 1.9rem);
   margin-bottom: 13px;
 }
 .xf-card h2 {
@@ -413,8 +413,9 @@ main {
 }
 .page-hero h1 {
   color: var(--black);
-  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
-  letter-spacing: -0.05em;
+  font-size: clamp(3.2rem, 7vw, 6.5rem);
+  line-height: 1.03;
+  letter-spacing: -0.04em;
   max-width: 900px;
 }
 .page-hero p {
